@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HBNU Education system</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="images/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/static/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/123735/46870/5baf7fa7f629d81330c78f20.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_858753_ufhkjuktgad.css">
+
+<body data-type="login">
+
+    <div class="am-g myapp-login">
+        <div class="myapp-login-logo-block  tpl-login-max">
+            <div class="myapp-login-logo-text" >
+                <div style="font-family:'SiYuan-ExtraLig14cab3ed641e357';">
+                    长江之滨
+                    <span><i class="icon iconfont icon-shanshui"></i></span>
+                    <span style="font-family:'SiYuan-ExtraLig14cab3ed641e357';">
+                        青山湖畔
+                    </span>
+                    <i ></i>
+                </div>
+            </div>
+
+            <div class="login-font" style="font-family:'SiYuan-ExtraLig14cab3ed641e357';">
+                {% if user == 1 %}
+                <i>学生 </i> or
+                <span> 教师</span>
+                {% else %}
+                <span>
+                    <a href='{{ url_for('studentlogin') }}'> 学生 </a>
+                </span> or
+                <i> 教师 </i>
+                {% endif %}
+
+            </div>
+            <div class="am-u-sm-10 login-am-center">
+                {% if user == 1 %}
+                <form class="am-form" method="post" action="/studentlogin">
+                    {% else %}
+                    <form class="am-form" method="post" action="/teacherlogin">
+                        {% endif %}
+                        <fieldset>
+                            <div class="am-form-group">
+                                <input type="text" class="" name="id" id="doc-ipt-email-1" placeholder="输入用户名">
+                            </div>
+                            <div class="am-form-group">
+                                <input type="password" name="password" class="" id="doc-ipt-pwd-1" placeholder="输入密码">
+                            </div>
+                            <p>
+                                <button type="submit" class="am-btn am-btn-default">
+                                    <span class="glyphicon glyphicon-log-in"></span>&ensp;登陆
+                                </button>
+                            </p>
+                        </fieldset>
+                    </form>
+                    {% for msg in get_flashed_messages(category_filter=['error']): %}
+                    <ul>
+                        <li>
+                            <div style="text-align:center" class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span>&ensp;账号或密码有误
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/amazeui.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
