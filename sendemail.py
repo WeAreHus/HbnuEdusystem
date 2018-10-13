@@ -9,8 +9,8 @@ from email.utils import formataddr
 from models import Score
 
 def sendemail(id, my_user, user_name):
-    my_sender='XXXXXXXX@QQ.com'    # 发件人邮箱账号
-    my_pass = 'XXXXXXXXXX'              # 发件人邮箱授权码
+    my_sender='2505888537@qq.com'    # 发件人邮箱账号
+    my_pass = 'XXXXXXXXXXX'              # 发件人邮箱授权码
     ret=True
     try:
         n = parsermail(id)
@@ -55,13 +55,22 @@ def parsermail(id):
 
 def wechatInfo(id, year, term):
     html = ""
-    sco = Score.query.filter(Score.stu_id == id).filter(Score.school_year == year).filter(Score.school_term == term).all()
+    if year == 'all':
+        if term == 'all':
+            sco = Score.query.filter(Score.stu_id == id).all()
+        else:
+            sco = Score.query.filter(Score.stu_id == id).filter(Score.school_term == term).all()
+    else:
+        if term == 'all':
+            sco = Score.query.filter(Score.stu_id == id).filter(Score.school_year == year).all()
+        else:
+            sco = Score.query.filter(Score.stu_id == id).filter(Score.school_year == year).filter(Score.school_term == term).all()
     if sco:
         for s in sco:
             html = html + str(s.class_name.encode('utf8')) + " "
             html = html + str(s.test_category.encode('utf8')) + " "
             html = html + str(s.score) + '\n'
-            html = html + '---------------------------------'
+            html = html + '\n'
     else:
         html = "暂无{}学年{}学期的成绩信息!".format(year, term)
 

@@ -8,7 +8,7 @@ threaded=True
 # 数据库信息
 HOST = "127.0.0.1"
 PORT = "3306"
-DB = "edu"
+DB = "XXXX"
 USER = "root"
 PASS = "XXXXXX"
 CHARSET = "utf8"

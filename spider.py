@@ -2,6 +2,7 @@
 import json
 import sys
 import time
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -18,7 +19,6 @@ sys.setdefaultencoding("utf-8")
 ctime = int(time.time() * 1000)
 post_url = 'http://jwxt.hbnu.edu.cn/jwglxt/xtgl/login_slogin.html?time={0}'.format(
     ctime)
-s = requests.Session()
 header = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
     'Accept-Encoding': 'gzip, deflate',
@@ -60,6 +60,7 @@ def getEnPassword(string, exponent, modulus):
 
 # 模拟登陆
 def spiderLogin(yhm, passwd):
+    s = requests.Session()
     r = s.get(post_url, headers=header1)
     r.encoding = 'utf-8'
     doc = r.text
@@ -102,7 +103,7 @@ def spiderLogin(yhm, passwd):
                       lists[10], lists[11], lists[12], lists[14])
         db.session.add(stu)
         db.session.commit()
-    return lists[1]
+    return lists[1], s
 
 
 # 将成绩存入数据库
@@ -122,9 +123,10 @@ def addScoreDB(key):
     score = float(key['cj'])
     GPA = float(key['jd'])
     class_mark = str(key['kcbj'])
+    if key.has_key('kkbmmc') == False:
+        key['kkbmmc'] = None
     class_ownership = str(key['kkbmmc'])
     stu_id = float(key['xh_id'])
-    #print school_year, school_term, class_name, class_code, credit, class_category, test_category, cjsfzf, score, GPA, class_mark, class_ownership, stu_id
     sco = Score.query.filter(Score.school_year == school_year).filter(Score.school_term == school_term).filter(
         Score.class_name == class_name).filter(Score.test_category == test_category).filter(Score.stu_id == stu_id).first()
     if sco:
@@ -146,7 +148,7 @@ def addScoreDB(key):
 
 # 获取成绩
 def getScore(yhm, passwd):
-    name = spiderLogin(yhm, passwd)
+    name, s = spiderLogin(yhm, passwd)
     formdata = {
         'xnm': '',
         'xqm': '',
@@ -177,7 +179,8 @@ def addTimetableDB(key, yhm, xnm, xqm):
     classroom = key['cdmc']
     teacher = key['xm']
     department = key['xqmc']
-    print key['kcmc'], key['xqjmc'], key['jc'], key['zcd'], key['cdmc'], key['xm'], key['xqmc']
+    length = re.findall(r"\d+\.?\d*", time)
+    l = int(length[1]) - int(length[0]) + 1
     sub = Subject.query.filter(Subject.school_year == xnm).filter(Subject.school_term == xqm).filter(
         Subject.class_name == class_name).filter(Subject.stu_id == yhm).first()
     if sub:
@@ -187,17 +190,19 @@ def addTimetableDB(key, yhm, xnm, xqm):
         sub.classroom = classroom
         sub.teacher = teacher
         sub.department = department
+        sub.length = l
         db.session.commit()
     else:
         sub = Subject(xnm, xqm, class_name, day, time, week,
-                      classroom, teacher, department, yhm)
+                      classroom, teacher, department, yhm, l)
         db.session.add(sub)
         db.session.commit()
 
 
 # 获取课程表
 def timeTable(yhm, passwd, xnm, xqm):
-    spiderLogin(yhm, passwd)
+    lists = spiderLogin(yhm, passwd)
+    s = lists[1]
     if xqm == "1":
         xq = "3"
     elif xqm == "2":
@@ -213,10 +218,3 @@ def timeTable(yhm, passwd, xnm, xqm):
     table = json.loads(doc)
     for key in table['kbList']:
         addTimetableDB(key, yhm, xnm, xqm)
-
-
-if __name__ == "__main__":
-    id = 2016115020429
-    passwd = 'qwer1234'
-    getScore(id, passwd)
-    #timeTable(id, passwd, '2017', '2')

@@ -1,5 +1,6 @@
 # coding:utf8
 from models import Student, Subject, Score
+import re
 
 
 # 计算平均学分
@@ -11,12 +12,12 @@ def exts(cla):
     # 平均绩点
     GPA = 0
     for c in cla:
-        if cmp(c.test_category.encode('utf-8'), '正常考试'):
+        if c.test_category.encode('utf-8') == '正常考试':
+            allcredit = allcredit + c.credit
+            GPA = GPA + c.GPA * c.credit
+        else:
             if c.score < 60:
                 gotcredit = gotcredit + c.credit
-        else:
-            GPA = GPA + c.GPA * c.credit
-            allcredit = allcredit + c.credit
     GPA = GPA/allcredit
     GPA = round(GPA, 2)
     credit = [allcredit, gotcredit, GPA]
@@ -41,10 +42,9 @@ def sub_query(id, year, term):
     if lists:
         credit = exts(lists)
     else:
-        credit = [0,0,0]
+        credit = [0, 0, 0]
 
     return credit, lists
-
 
 
 def drow(id):
@@ -76,5 +76,36 @@ def drow(id):
             score_list = []
             print credit
     return credit_list, time_list
+
+
+def getTimeTable(id, year, term):
+    time_table = {
+        '星期一': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期二': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期三': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期四': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期五': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期六': [[], [], [], [], [], [], [], [], [], [], []],
+        '星期日': [[], [], [], [], [], [], [], [], [], [], []],
+    }
+    lists = ''
+    for day in time_table.keys():
+        sco = Subject.query.filter(Subject.stu_id == id).filter(Subject.school_year == year).filter(
+            Subject.school_term == term).filter(Subject.day == day).all()
+        for s in sco:
+            time = re.findall(r"\d+\.?\d*", s.time)
+            time_table[day][int(time[0])-1].append(s)
+            for i in range(int(time[0])+1, int(time[1])+1):
+                time_table[day][i-1].append(0)
+        
+        for t in time_table[day]:
+            if t:
+                for s in t:
+                    if s != 0:
+                        lists = lists + s.class_name + s.day + s.time + s.week + s.teacher + s.classroom
+                t.append(lists)
+                lists = ''
+
+    return time_table
 
 

@@ -45,8 +45,16 @@ ORM框架：`flask-sqlalchemy`
 ```
 |-- README.md
 |-- __init__.py
-|-- checkcode.gif
 |-- config.py
+|-- crypto_rsa
+|   |-- RSAJS.py
+|   |-- RSAJS.pyc
+|   |-- __init__.py
+|   |-- __init__.pyc
+|   |-- base64.py
+|   |-- base64.pyc
+|   |-- safeInput.py
+|   `-- safeInput.pyc
 |-- exts.py
 |-- manage.py
 |-- matplot.py
@@ -56,26 +64,6 @@ ORM框架：`flask-sqlalchemy`
 |-- sendemail.py
 |-- spider.py
 |-- static
-|   |-- bootstrap-3.3.7-dist
-|   |   |-- css
-|   |   |   |-- bootstrap-theme.css
-|   |   |   |-- bootstrap-theme.css.map
-|   |   |   |-- bootstrap-theme.min.css
-|   |   |   |-- bootstrap-theme.min.css.map
-|   |   |   |-- bootstrap.css
-|   |   |   |-- bootstrap.css.map
-|   |   |   |-- bootstrap.min.css
-|   |   |   `-- bootstrap.min.css.map
-|   |   |-- fonts
-|   |   |   |-- glyphicons-halflings-regular.eot
-|   |   |   |-- glyphicons-halflings-regular.svg
-|   |   |   |-- glyphicons-halflings-regular.ttf
-|   |   |   |-- glyphicons-halflings-regular.woff
-|   |   |   `-- glyphicons-halflings-regular.woff2
-|   |   `-- js
-|   |       |-- bootstrap.js
-|   |       |-- bootstrap.min.js
-|   |       `-- npm.js
 |   |-- css
 |   |   |-- admin.css
 |   |   |-- amazeui.min.css
@@ -97,14 +85,17 @@ ORM框架：`flask-sqlalchemy`
 |       |-- iscroll.js
 |       `-- jquery.min.js
 |-- templates
+|   |-- QRlogin.html
 |   |-- base.html
+|   |-- index.html
 |   |-- login.html
 |   |-- score.html
+|   |-- sendchat.html
 |   |-- sendemail.html
 |   |-- student.html
-|   `-- time_table.html
+|   `-- timetable.html
+|-- test.html
 `-- view.py
-
 ```
 
 ### 项目功能描述

@@ -74,8 +74,8 @@ class Subject(db.Model):
     teacher = db.Column(db.String(20))          # 任课老师
     department = db.Column(db.String(20))       # 本部
     stu_id = db.Column(db.BIGINT)               # 学生学号
-
-    def __init__(self, school_year, school_term, class_name, day, time, week, classroom, teacher, department, stu_id):
+    length = db.Column(db.INT)
+    def __init__(self, school_year, school_term, class_name, day, time, week, classroom, teacher, department, stu_id, length):
         self.school_year = school_year
         self.school_term = school_term
         self.class_name = class_name
@@ -86,6 +86,7 @@ class Subject(db.Model):
         self.teacher = teacher
         self.department = department
         self.stu_id = stu_id
+        self.length = length
 
 
 #db.drop_all()

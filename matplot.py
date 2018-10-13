@@ -12,7 +12,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def chart(credit_list, time_list):
-    bar = Line("学生成绩平均绩点折线图")
+    bar = Line("学生成绩平均绩点折线图\n")
     bar.add("平均绩点GPA", time_list, credit_list, is_more_utils=True)
     bar.show_config()
     bar.render()

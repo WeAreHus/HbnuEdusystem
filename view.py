@@ -10,7 +10,7 @@ from flask import (Flask, flash, g, jsonify, redirect, render_template,
                    request, session, url_for)
 
 import config
-from exts import drow, exts, sub_query
+from exts import drow, exts, sub_query, getTimeTable
 from matplot import chart
 from models import Score, Student, Subject, db
 from sendemail import sendemail, parsermail, wechatInfo
@@ -21,7 +21,7 @@ app.config.from_object(config)
 db.init_app(app)
 
 with app.test_request_context():
-    # db.drop_all()
+    #db.drop_all()
     db.create_all()
 
 
@@ -65,6 +65,7 @@ def studentlogin():
             password = str(request.form.get('password'))
             username = getScore(id, password)
             session['id'] = id
+            session['passwd'] = password
             session['name'] = username
             session['user'] = 'student'
             return redirect(url_for('student'))
@@ -114,10 +115,19 @@ def score():
 # 课程查询
 @app.route('/timetable', methods=['GET', 'POST'])
 def timetable():
+    week = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日']
+    id = session.get('id')
+    passwd = session.get('passwd')
     if request.method == 'GET':
-        return render_template('student.html')
+        timeTable(id, passwd, '2017', '1')
+        time_table = getTimeTable(id, '2017', '1')
+        return render_template("timetable.html",len=len, week=week,  time_table=time_table, year='2017', term='1')
     else:
-        return render_template('student.html')
+        year = request.form.get('year')
+        term = request.form.get('term')
+        timeTable(id, passwd, year, term)
+        time_table = getTimeTable(id, year, term)
+        return render_template("timetable.html",len=len, week=week, time_table=time_table, year=year, term=term)
 
 
 # 邮箱推送
