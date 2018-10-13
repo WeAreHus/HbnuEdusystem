@@ -97,15 +97,4 @@ def getTimeTable(id, year, term):
             time_table[day][int(time[0])-1].append(s)
             for i in range(int(time[0])+1, int(time[1])+1):
                 time_table[day][i-1].append(0)
-        
-        for t in time_table[day]:
-            if t:
-                for s in t:
-                    if s != 0:
-                        lists = lists + s.class_name + s.day + s.time + s.week + s.teacher + s.classroom
-                t.append(lists)
-                lists = ''
-
     return time_table
-
-
