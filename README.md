@@ -48,13 +48,9 @@ ORM框架：`flask-sqlalchemy`
 |-- config.py
 |-- crypto_rsa
 |   |-- RSAJS.py
-|   |-- RSAJS.pyc
 |   |-- __init__.py
-|   |-- __init__.pyc
 |   |-- base64.py
-|   |-- base64.pyc
-|   |-- safeInput.py
-|   `-- safeInput.pyc
+|   `-- safeInput.py
 |-- exts.py
 |-- manage.py
 |-- matplot.py
@@ -94,7 +90,6 @@ ORM框架：`flask-sqlalchemy`
 |   |-- sendemail.html
 |   |-- student.html
 |   `-- timetable.html
-|-- test.html
 `-- view.py
 ```
 
