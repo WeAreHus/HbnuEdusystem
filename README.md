@@ -20,7 +20,7 @@
 
 运行环境：`ubuntu16.04`
 
-### 技术依赖 
+### 技术相关
 ---
 Web 应用框架：`Flask`
 
@@ -30,13 +30,15 @@ ORM框架：`flask-sqlalchemy`
 
 数据库迁移：`flask-migrate`, `flask-script`
 
-爬虫相关库：`request`, `BeautifulSoup`
+爬虫相关：`request`, `BeautifulSoup`
 
-前端JS：`pyecharts`, `bootstrap`
+前端UI：`amazeui`, `pyecharts`, `bootstrap`
+
+矢量图标：`Iconfont`, `Glyphicon Halflings`
+
+字体：`youziku`
 
 邮件发送：`smtplib`
-
-微信发送：`itchat`
 
 
 ### 项目目录
@@ -105,12 +107,13 @@ ORM框架：`flask-sqlalchemy`
 > 根据smtp协议实现成绩邮箱推送。
 * 支持将学生的成绩信息通过移动端微信扫描二维码实现微信推送
 
-> 通过itchat实现微信推送
+> 通过爬虫实现微信登陆以及向文件传输助手发送成绩
 
 
 ### 项目数据库设计
 ---
  数据库ER图
+
 ![](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/4BKeiFjdQkOUYkBlA6iIoxf3BQUW1ZzvSupBg0dS6u0!/c/dGwBAAAAAAAA&ek=1&kp=1&pt=0&bo=JQNGAgAAAAADF1A!&tl=1&vuin=2018982763&tm=1539486000&sce=60-2-2&rf=0-0)
 
 ### 注意事项
@@ -120,8 +123,9 @@ ORM框架：`flask-sqlalchemy`
 
 使用前需要修改的内容：
 - `config.py`中的数据库信息
-- `matplot.py`第20，21，24，40行的路径
-- `spider.py`第34，254行的路径
+- 因为项目中所有涉及文件路径的代码大多数为绝对路径，所以：
+ - `matplot.py`第19，20，23，39行的路径
+ - `spider.py`第34，254行的路径
 - `sendmail.py`中发件人信息
 
 使用`flask-script`配合`flask-migrate`进行版本库迁移，第一次使用时在命令行中使用`python manage.py db init`进行初始化，建立数据库迁移相关的文件和文件夹，之后每次需要迁移依次使用`python manage.py db migrate`和`python manage.py db upgrade`即可
@@ -132,7 +136,7 @@ ORM框架：`flask-sqlalchemy`
 
 ### 更新链接
 ---
-[github](https://github.com/WeAreHus/StudyRecord/tree/master/day-2018-08-26/new_system)
+[github](https://github.com/WeAreHus/HbnuEdusystem)
 
 
 
@@ -140,7 +144,9 @@ ORM框架：`flask-sqlalchemy`
 
 ### 运行效果部分展示
 ---
-![登陆](http://a3.qpic.cn/psb?/V13uRwZ427WzZu/hJrCWjQVdkUoQv5K1f4uOytz9v2.xCL5dxnUujJh.fI!/b/dDYBAAAAAAAA&ek=1&kp=1&pt=0&bo=MAf4AjAH.AIDEDU!&tl=1&vuin=2018982763&tm=1535857200&sce=50-1-1&rf=viewer_311)
-![主页](http://a4.qpic.cn/psb?/V13uRwZ427WzZu/vl8wWVEKe6.07FzcwLJGH5pbYlP3xLU.MCyrKURuZ9s!/b/dDcBAAAAAAAA&ek=1&kp=1&pt=0&bo=HgfzAh4H8wIDEDU!&tl=1&vuin=2018982763&tm=1535857200&sce=60-4-3&rf=viewer_311)
-![成绩](http://a3.qpic.cn/psb?/V13uRwZ427WzZu/p3f6KdfDqGBteLoyBnsmjWi6XAHwiNAWopTiqzsMu7M!/b/dFYAAAAAAAAA&ek=1&kp=1&pt=0&bo=Dgf8Ag4H*AIDEDU!&tl=1&vuin=2018982763&tm=1535857200&sce=50-1-1&rf=viewer_311)
-![课程](http://a1.qpic.cn/psb?/V13uRwZ427WzZu/Mymr7HYjbUpPEdMZGnNtcvc4fXqMMLsORw3N0Qd1bVs!/b/dDQBAAAAAAAA&ek=1&kp=1&pt=0&bo=FQf1AhUH9QIDEDU!&tl=1&vuin=2018982763&tm=1535857200&sce=50-1-1&rf=viewer_311)
+![登陆](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/AOBaift4dR6PWNf6akgSmE7gC4AQHCE7b.mOKxNkuLk!/c/dDwBAAAAAAAA&ek=1&kp=1&pt=0&bo=CAaAAgAAAAADF74!&tl=1&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
+![主页](http://a4.qpic.cn/psb?/V13uRwZ41wvDRP/RUEJ2YXUMoVFGK7Xu5aEWk63Fw5Wlxr4J5ugd4JvRdU!/c/dAsBAAAAAAAA&ek=1&kp=1&pt=0&bo=wAN.AQAAAAABF4w!&tl=3&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
+![成绩](http://a2.qpic.cn/psb?/V13uRwZ41wvDRP/JK.k.nv1zE4Moy5blLEb*xzMNUM2r*TxmGPlfg9jB3o!/c/dA0BAAAAAAAA&ek=1&kp=1&pt=0&bo=wAONAQAAAAABF38!&tl=3&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
+![课程](http://a2.qpic.cn/psb?/V13uRwZ41wvDRP/*sA50deeOO1hyv8G21T909KR3u.nU0VxGcMOjtqEYso!/c/dAkBAAAAAAAA&ek=1&kp=1&pt=0&bo=uANZAQAAAAABF9M!&tl=3&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
+![邮箱推送](http://a3.qpic.cn/psb?/V13uRwZ41wvDRP/yar8BnepSAAkCfzXKLn.nB0.2.BbWiMClQHJr5D8zZQ!/c/dAoBAAAAAAAA&ek=1&kp=1&pt=0&bo=HwfQAQAAAAADF*s!&tl=1&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
+![微信推送](http://a3.qpic.cn/psb?/V13uRwZ41wvDRP/D3drQPDk8v1cWVsM8PqhBdb1mzWt0MNcTUYnJh2STwo!/c/dNoAAAAAAAAA&ek=1&kp=1&pt=0&bo=JQdSAgAAAAADF0A!&tl=1&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
