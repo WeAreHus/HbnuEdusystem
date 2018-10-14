@@ -9,7 +9,7 @@ from email.utils import formataddr
 from models import Score
 
 def sendemail(id, my_user, user_name):
-    my_sender='2505888537@qq.com'    # 发件人邮箱账号
+    my_sender='you@example.com'    # 发件人邮箱账号
     my_pass = 'XXXXXXXXXXX'              # 发件人邮箱授权码
     ret=True
     try:
