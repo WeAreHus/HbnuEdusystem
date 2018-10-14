@@ -8,7 +8,7 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from view import app, db
-from models import Student, Subject, Score, stu_with_sub
+from models import Student, Subject, Score
 
 manager = Manager(app)
 
