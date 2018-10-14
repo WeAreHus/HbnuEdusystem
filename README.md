@@ -109,7 +109,7 @@ ORM框架：`flask-sqlalchemy`
 ### 项目数据库设计
 ---
  数据库ER图
-![](https://h5.qzone.qq.com/page/photo?init=photo.v7/common/viewer2/index&picKey=NDR0aztXePe4wltkx14DbAEAAAAAAAA!&ownerUin=2018982763&appid=4&topicId=V13uRwZ41wvDRP_NDR0aztXePe4wltkx14DbAEAAAAAAAA!_0_0&pre=http%3A%2F%2Fa1.qpic.cn%2Fpsb%3F%2FV13uRwZ41wvDRP%2F4BKeiFjdQkOUYkBlA6iIoxf3BQUW1ZzvSupBg0dS6u0!%2Fm%2FdGwBAAAAAAAA%26ek%3D1%26kp%3D1%26pt%3D0%26bo%3DJQNGAgAAAAADF1A!%26tl%3D1%26vuin%3D2018982763%26tm%3D1539486000%26sce%3D60-3-3%26rf%3D0-0&useqzfl=1&useinterface=1&noCloseBtn=0&inqq=1)
+![](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/4BKeiFjdQkOUYkBlA6iIoxf3BQUW1ZzvSupBg0dS6u0!/c/dGwBAAAAAAAA&ek=1&kp=1&pt=0&bo=JQNGAgAAAAADF1A!&tl=1&vuin=2018982763&tm=1539486000&sce=60-2-2&rf=0-0)
 
 ### 注意事项
 ---
