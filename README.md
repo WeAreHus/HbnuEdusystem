@@ -1,7 +1,8 @@
-# 项目名称：模拟教务系统(web)
-
+# 项目名称：模拟教务系统(web)  
+[![](https://travis-ci.org/Alamofire/Alamofire.svg?branch=master)](https://travis-ci.org/Alamofire/Alamofire)![](https://img.shields.io/badge/python-2.7-orange.svg)![](https://img.shields.io/badge/github-@Edusystem-blue.svg?colorA=abcdef)![](https://img.shields.io/badge/platform-flask-lightgrey.svg)![](https://img.shields.io/badge/HBNU-jwxt-red.svg)![](https://travis-ci.org/Alamofire/Alamofire.svg?branch=master)
 
 ### 开发人员
+
 ---
 
 项目开发：[Xiang Jinhu](https://github.com/chirsxjh)，[Chen Wei](https://github.com/Cris0525)，[Fu Tongyong](https://github.com/CANYOUFINDIT)
@@ -10,8 +11,8 @@
 
 ### 需求概述
 ---
-这个项目实现了湖北师范大学学生进行教务系统正方教务系统的一套API： 包括模拟登陆，个人信息查询，课表获取，成绩查询等等。随着API的不断完善于扩充，可以很方便的作为后台服务。 
-用户只需个人学号密码即可获取个人成绩与课程信息，无须验证码登录，并且在系统首页能够以折线图的形式来展示学生个人的平均绩点走向，同时能够将个人成绩以微信推送与邮件发送给用户，大大增加了学生查询成绩信息的便利性。
+这个项目实现了湖北师范大学正方教务系统的一套API： 包括模拟登陆，个人信息查询，课表获取，成绩查询，成绩邮箱/微信推送等等。随着API的不断完善与扩充，可以很方便为本校学生作为后台服务。 
+用户只需输入个人学号密码即可获取个人成绩与课程信息，并且在系统首页能够以折线图的形式来展示学生个人的平均绩点走向，同时能够将个人成绩以微信推送和邮件发送的方式提供给用户，大大增加了本校学生查询个人成绩相关信息的便利性。
 
 ### 项目运行环境及技术依赖
 ---
@@ -30,8 +31,6 @@ ORM框架：`flask-sqlalchemy`
 数据库迁移：`flask-migrate`, `flask-script`
 
 爬虫相关库：`request`, `BeautifulSoup`
-
-验证码识别：[ZFCheckCode](https://github.com/sctpan/CheckCodeRecognition)
 
 前端JS：`pyecharts`, `bootstrap`
 
@@ -95,15 +94,18 @@ ORM框架：`flask-sqlalchemy`
 
 ### 项目功能描述
 ---
-* 各学期平均成绩点折线图展示
+* 学生用户各学期的平均成绩点折线图直观展示
 >通过shutil将爬虫爬取存入数据库的平均绩点绘制成折线图展示
-* 成绩查询
+* 支持学生用户进行各学期的成绩信息查询，并且将合格，不合格以不同颜色区分开来
 > 通过教务系统个人信息页面，抓取，个人信息，并持久化保存到数据库中，在前端界面做以展示。
-* 课表查询
+* 支持学生用户进行各学期的课程信息查询
+
 > 通过教务系统课表信息页面，抓取，课程信息，并持久化保存到数据库中，在前端界面做以展示。
-* 成绩邮箱推送
+* 支持将学生的成绩信息通过填写的邮箱进行推送
 > 根据smtp协议实现成绩邮箱推送。
-* 成绩微信推送
+* 支持将学生的成绩信息通过移动端微信扫描二维码实现微信推送
+
+> 通过itchat实现微信推送
 
 
 ### 项目数据库设计
@@ -124,8 +126,7 @@ ORM框架：`flask-sqlalchemy`
 
 使用`flask-script`配合`flask-migrate`进行版本库迁移，第一次使用时在命令行中使用`python manage.py db init`进行初始化，建立数据库迁移相关的文件和文件夹，之后每次需要迁移依次使用`python manage.py db migrate`和`python manage.py db upgrade`即可
 
-
-项目启动：`python view.py`
+**项目启动：`python view.py`**
 
 
 
