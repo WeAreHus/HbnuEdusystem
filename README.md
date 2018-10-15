@@ -22,17 +22,17 @@
 
 ### 技术相关
 ---
-Web 应用框架：`Flask`
+Web 应用框架：`Flask1.0.2`
 
-数据库：`MySQL`
+数据库：`MySQL 8.0.12 for Linux on x86_64`
 
-ORM框架：`flask-sqlalchemy`
+ORM框架：`flask-sqlalchemy2.3.2`
 
-数据库迁移：`flask-migrate`, `flask-script`
+数据库迁移：`flask-migrate2.2.1`, `flask-script2.0.6`
 
-爬虫相关：`request`, `BeautifulSoup`
+爬虫相关：`requests2.19.1`, `BeautifulSoup4.6.3`
 
-前端UI：`amazeui`, `pyecharts`, `bootstrap`
+前端UI：`amazeui`, `pyecharts`, `bootstrap3.3.7`
 
 矢量图标：`Iconfont`, `Glyphicon Halflings`
 
