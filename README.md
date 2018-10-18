@@ -56,22 +56,38 @@ ORM框架：`flask-sqlalchemy2.3.2`
 ---
 
 #### sipder.py
+
 `getEnPassword()`：对输入的密码进行加密
+
 `spiderLogin()`：爬虫登陆湖北师范大学教务系统
+
 `getScore()`：爬取成绩
+
 `addScoreDB()`：解析成绩数据并存入数据库
+
 `timeTable()`：爬取课程表
+
 `addTimetableDB()`：解析课程数据存入数据库
+
 #### matplot.py
+
 `chart()`:绘制平均绩点折线图
+
 #### exts.py
 `exts()`：计算平均绩点、学分数据
+
 `sub_query()`：获取对应学年学期的成绩对象
+
 `draw()`:统计成绩的学年学期，每学期的平均绩点
+
 `getTimeTable()`：保存对应学期的课程数据，用于数据渲染
+
 #### sendemail.py
+
 `sendemail()`：将解析好的内容发送到指定邮箱
+
 `parsermail()`：拼接成绩表，用于邮箱推送
+
 `wechatInfo()`：拼接成绩文本，用于微信推送
 
 ### 注意事项
