@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 
 from crypto_rsa.base64 import Base64 as pB64
 from crypto_rsa.RSAJS import RSAKey
-from crypto_rsa.safeInput import safeInput
 from models import Score, Student, Subject, db
 
 reload(sys)
