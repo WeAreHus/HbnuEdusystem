@@ -18,7 +18,10 @@ def exts(cla):
         else:
             if c.score < 60:
                 gotcredit = gotcredit + c.credit
-    GPA = GPA/allcredit
+    if allcredit == 0:
+        GPA = 0
+    else:
+        GPA = GPA/allcredit
     GPA = round(GPA, 2)
     credit = [allcredit, gotcredit, GPA]
     return credit
@@ -53,7 +56,7 @@ def draw(id):
     score_list = []
     credit_list = []
     time_list = []
-    sco = Score.query.filter(Score.stu_id == id).filter(Score.test_category == '正常考试').all()
+    sco = Score.query.filter(Score.stu_id == id).all()
     for s in sco:
         if s.school_year in year_list:
             pass
