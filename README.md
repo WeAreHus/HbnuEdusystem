@@ -2,7 +2,6 @@
 [![](https://travis-ci.org/Alamofire/Alamofire.svg?branch=master)](https://travis-ci.org/Alamofire/Alamofire)![](https://img.shields.io/badge/python-2.7-orange.svg)![](https://img.shields.io/badge/github-@Edusystem-blue.svg?colorA=abcdef)![](https://img.shields.io/badge/platform-flask-lightgrey.svg)![](https://img.shields.io/badge/HBNU-jwxt-red.svg)![](https://travis-ci.org/Alamofire/Alamofire.svg?branch=master)
 
 ### 开发人员
-
 ---
 
 项目开发：[Xiang Jinhu](https://github.com/chirsxjh)，[Chen Wei](https://github.com/Cris0525)，[Fu Tongyong](https://github.com/CANYOUFINDIT)
@@ -14,14 +13,12 @@
 这个项目实现了湖北师范大学正方教务系统的一套API： 包括模拟登陆，个人信息查询，课表获取，成绩查询，成绩邮箱/微信推送等等。随着API的不断完善与扩充，可以很方便为本校学生作为后台服务。 
 用户只需输入个人学号密码即可获取个人成绩与课程信息，并且在系统首页能够以折线图的形式来展示学生个人的平均绩点走向，同时能够将个人成绩以微信推送和邮件发送的方式提供给用户，大大增加了本校学生查询个人成绩相关信息的便利性。
 
-### 项目运行环境及技术依赖
+### 项目运行环境及技术相关
 ---
 语言：`python2.7`
 
 运行环境：`ubuntu16.04`
 
-### 技术相关
----
 Web 应用框架：`Flask1.0.2`
 
 数据库：`MySQL 8.0.12 for Linux on x86_64`
@@ -41,8 +38,70 @@ ORM框架：`flask-sqlalchemy2.3.2`
 邮件发送：`smtplib`
 
 
+### 项目功能描述
+---
+
+* 学生用户各学期的平均成绩点折线图直观展示
+>通过shutil将爬虫爬取存入数据库的平均绩点绘制成折线图展示
+* 支持学生用户进行各学期的成绩信息查询，并且将合格，不合格以不同颜色区分开来
+> 通过教务系统个人信息页面，抓取，个人信息，并持久化保存到数据库中，在前端界面做以展示。
+* 支持学生用户进行各学期的课程信息查询
+> 通过教务系统课表信息页面，抓取，课程信息，并持久化保存到数据库中，在前端界面做以展示。
+* 支持将学生的成绩信息通过填写的邮箱进行推送
+> 根据smtp协议实现成绩邮箱推送。
+* 支持将学生的成绩信息通过移动端微信扫描二维码实现微信推送
+> 通过爬虫实现微信登陆以及向文件传输助手发送成绩
+
+### API
+---
+
+#### sipder.py
+`getEnPassword()`：对输入的密码进行加密
+`spiderLogin()`：爬虫登陆湖北师范大学教务系统
+`getScore()`：爬取成绩
+`addScoreDB()`：解析成绩数据并存入数据库
+`timeTable()`：爬取课程表
+`addTimetableDB()`：解析课程数据存入数据库
+#### matplot.py
+`chart()`:绘制平均绩点折线图
+#### exts.py
+`exts()`：计算平均绩点、学分数据
+`sub_query()`：获取对应学年学期的成绩对象
+`draw()`:统计成绩的学年学期，每学期的平均绩点
+`getTimeTable()`：保存对应学期的课程数据，用于数据渲染
+#### sendemail.py
+`sendemail()`：将解析好的内容发送到指定邮箱
+`parsermail()`：拼接成绩表，用于邮箱推送
+`wechatInfo()`：拼接成绩文本，用于微信推送
+
+### 注意事项
+---
+
+通过本命令安装有关依赖库：
+`pip install -r requirements.txt`
+
+使用前需要修改的内容：
+- `config.py`中的数据库信息
+- 因为项目中所有涉及文件路径的代码大多数为绝对路径，所以：
+ - `matplot.py`第19，20，23，39行的路径
+ - `spider.py`第34，254行的路径
+- `sendmail.py`中发件人信息
+
+使用`flask-script`配合`flask-migrate`进行版本库迁移，第一次使用时在命令行中使用`python manage.py db init`进行初始化，建立数据库迁移相关的文件和文件夹，之后每次需要迁移依次使用`python manage.py db migrate`和`python manage.py db upgrade`即可
+
+**项目启动：`python view.py`**
+
+### 项目数据库设计
+---
+
+ 数据库ER图
+
+![](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/4BKeiFjdQkOUYkBlA6iIoxf3BQUW1ZzvSupBg0dS6u0!/c/dGwBAAAAAAAA&ek=1&kp=1&pt=0&bo=JQNGAgAAAAADF1A!&tl=1&vuin=2018982763&tm=1539486000&sce=60-2-2&rf=0-0)
+
+
 ### 项目目录
 ---
+
 ```
 |-- README.md
 |-- __init__.py
@@ -94,56 +153,14 @@ ORM框架：`flask-sqlalchemy2.3.2`
 `-- view.py
 ```
 
-### 项目功能描述
----
-* 学生用户各学期的平均成绩点折线图直观展示
->通过shutil将爬虫爬取存入数据库的平均绩点绘制成折线图展示
-* 支持学生用户进行各学期的成绩信息查询，并且将合格，不合格以不同颜色区分开来
-> 通过教务系统个人信息页面，抓取，个人信息，并持久化保存到数据库中，在前端界面做以展示。
-* 支持学生用户进行各学期的课程信息查询
-
-> 通过教务系统课表信息页面，抓取，课程信息，并持久化保存到数据库中，在前端界面做以展示。
-* 支持将学生的成绩信息通过填写的邮箱进行推送
-> 根据smtp协议实现成绩邮箱推送。
-* 支持将学生的成绩信息通过移动端微信扫描二维码实现微信推送
-
-> 通过爬虫实现微信登陆以及向文件传输助手发送成绩
-
-
-### 项目数据库设计
----
- 数据库ER图
-
-![](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/4BKeiFjdQkOUYkBlA6iIoxf3BQUW1ZzvSupBg0dS6u0!/c/dGwBAAAAAAAA&ek=1&kp=1&pt=0&bo=JQNGAgAAAAADF1A!&tl=1&vuin=2018982763&tm=1539486000&sce=60-2-2&rf=0-0)
-
-### 注意事项
----
-通过本命令安装有关依赖库：
-`pip install -r requirements.txt`
-
-使用前需要修改的内容：
-- `config.py`中的数据库信息
-- 因为项目中所有涉及文件路径的代码大多数为绝对路径，所以：
- - `matplot.py`第19，20，23，39行的路径
- - `spider.py`第34，254行的路径
-- `sendmail.py`中发件人信息
-
-使用`flask-script`配合`flask-migrate`进行版本库迁移，第一次使用时在命令行中使用`python manage.py db init`进行初始化，建立数据库迁移相关的文件和文件夹，之后每次需要迁移依次使用`python manage.py db migrate`和`python manage.py db upgrade`即可
-
-**项目启动：`python view.py`**
-
-
-
 ### 更新链接
 ---
+
 [github](https://github.com/WeAreHus/HbnuEdusystem)
-
-
-
-
 
 ### 运行效果部分展示
 ---
+
 ![登陆](http://a1.qpic.cn/psb?/V13uRwZ41wvDRP/AOBaift4dR6PWNf6akgSmE7gC4AQHCE7b.mOKxNkuLk!/c/dDwBAAAAAAAA&ek=1&kp=1&pt=0&bo=CAaAAgAAAAADF74!&tl=1&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
 ![主页](http://a4.qpic.cn/psb?/V13uRwZ41wvDRP/RUEJ2YXUMoVFGK7Xu5aEWk63Fw5Wlxr4J5ugd4JvRdU!/c/dAsBAAAAAAAA&ek=1&kp=1&pt=0&bo=wAN.AQAAAAABF4w!&tl=3&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
 ![成绩](http://a2.qpic.cn/psb?/V13uRwZ41wvDRP/JK.k.nv1zE4Moy5blLEb*xzMNUM2r*TxmGPlfg9jB3o!/c/dA0BAAAAAAAA&ek=1&kp=1&pt=0&bo=wAONAQAAAAABF38!&tl=3&vuin=2505888537&tm=1539493200&sce=60-2-2&rf=0-0)
