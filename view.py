@@ -10,7 +10,7 @@ from flask import (Flask, flash, g, jsonify, redirect, render_template,
                    request, session, url_for)
 
 import config
-from exts import drow, exts, sub_query, getTimeTable
+from exts import draw, exts, sub_query, getTimeTable
 from matplot import chart
 from models import Score, Student, Subject, db
 from sendemail import sendemail, parsermail, wechatInfo
@@ -79,7 +79,7 @@ def studentlogin():
 def student():
     if request.method == 'GET':
         id = session.get('id')
-        credit_list, time_list = drow(id)
+        credit_list, time_list = draw(id)
         credit = []
         for c in credit_list:
             credit.append(c[2])

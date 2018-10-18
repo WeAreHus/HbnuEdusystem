@@ -47,13 +47,13 @@ def sub_query(id, year, term):
     return credit, lists
 
 
-def drow(id):
+def draw(id):
     year_list = []
     term_list = []
     score_list = []
     credit_list = []
     time_list = []
-    sco = Score.query.filter(Score.stu_id == id).all()
+    sco = Score.query.filter(Score.stu_id == id).filter(Score.test_category == '正常考试').all()
     for s in sco:
         if s.school_year in year_list:
             pass
