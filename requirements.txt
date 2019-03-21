@@ -14,7 +14,7 @@ pandas==0.23.4
 Pillow==5.2.0
 post==1.0.2
 pycurl==7.43.0.1
-pyecharts==0.5.8
+pyecharts==0.5.11
 pyecharts-javascripthon==0.0.6
 pyecharts-jupyter-installer==0.0.3
 pyparsing==2.2.0
@@ -26,3 +26,4 @@ requests==2.19.1
 SQLAlchemy==1.2.10
 urllib3==1.23
 Werkzeug==0.14.1
+rsa==4.0
