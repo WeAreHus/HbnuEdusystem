@@ -16,11 +16,10 @@ def chart(credit_list, time_list):
     bar.add("平均绩点GPA", time_list, credit_list, is_more_utils=True)
     bar.show_config()
     bar.render()
-    shutil.move('/home/fty/new-system/render.html',
-                '/home/fty/new-system/templates/student.html')
+    shutil.move(os.path.abspath('render.html'), os.path.abspath('templates/student.html'))
 
     file = ""
-    with open('/home/fty/new-system/templates/student.html', 'r') as f:
+    with open(os.path.abspath('templates/student.html'), 'r') as f:
         hello = f.read()
         file = hello
         f.close()
@@ -36,7 +35,7 @@ def chart(credit_list, time_list):
     {% endblock %}
     {% block body_part2 %}
     '''
-    with open('/home/fty/new-system/templates/student.html', 'w') as f1:
+    with open(os.path.abspath('templates/student.html'), 'w') as f1:
         f1.write(head)
         f1.write(file)
         f1.write('\n')
