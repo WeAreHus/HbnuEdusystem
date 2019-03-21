@@ -98,12 +98,13 @@ ORM框架：`flask-sqlalchemy2.3.2`
 
 使用前需要修改的内容：
 - `config.py`中的数据库信息
-- 因为项目中所有涉及文件路径的代码大多数为绝对路径，所以：
- - `matplot.py`第19，20，23，39行的路径
- - `spider.py`第34，254行的路径
 - `sendmail.py`中发件人信息
 
+使用前数据库需支持中文:`sql>set character_set_server=utf8;` `sql>set character_set_database=utf8;`
+
 使用`flask-script`配合`flask-migrate`进行版本库迁移，第一次使用时在命令行中使用`python manage.py db init`进行初始化，建立数据库迁移相关的文件和文件夹，之后每次需要迁移依次使用`python manage.py db migrate`和`python manage.py db upgrade`即可
+
+可能会出现bootstrap框架失效的情况，使用时看情况自行调整
 
 **项目启动：`python view.py`**
 
